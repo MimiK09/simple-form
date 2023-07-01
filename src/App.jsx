@@ -16,28 +16,31 @@ function App() {
 		password: password,
 	};
 	
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (name == "" || email == "" || password == "") {
+			return setErrorMessage(
+				"Tous les champs obligatoires ne sont pas saisis"
+			);
+		} else {
+			setErrorMessage("");
+		}
+		if (password !== confirmPassword) {
+			return setErrorMessage("Les mots de passe ne sont pas identiques");
+		} else {
+			setErrorMessage("");
+		}
+		setIsVisible(false);
+		console.log(data);
+	}
+
+	
 
 	return (
 		<>
 			<form
 				className={isVisible ? "visible" : "invisible"}
-				onSubmit={(event) => {
-					event.preventDefault();
-					if (name == "" || email == "" || password == "") {
-						return setErrorMessage(
-							"Tous les champs obligatoires ne sont pas saisis"
-						);
-					} else {
-						setErrorMessage("");
-					}
-					if (password !== confirmPassword) {
-						return setErrorMessage("Les mots de passe ne sont pas identiques");
-					} else {
-						setErrorMessage("");
-					}
-					setIsVisible(false);
-					console.log(data);
-				}}
+				onSubmit={handleSubmit}
 			>
 				<h1>Create account</h1>
 				<label>
@@ -113,6 +116,6 @@ function App() {
 			</div>
 		</>
 	);
-}
+				}
 
 export default App;
