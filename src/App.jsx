@@ -1,5 +1,7 @@
 import "./App.css";
 import { useState } from "react";
+import axios from "axios";
+
 
 function App() {
 	const [isVisible, setIsVisible] = useState(true);
@@ -8,10 +10,12 @@ function App() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
-
-	const handle = () => {
-
-	}
+	const data = {
+		name: name,
+		email: email,
+		password: password,
+	};
+	
 
 	return (
 		<>
@@ -20,7 +24,9 @@ function App() {
 				onSubmit={(event) => {
 					event.preventDefault();
 					if (name == "" || email == "" || password == "") {
-						return setErrorMessage("Tous les champs obligatoires ne sont pas saisis");
+						return setErrorMessage(
+							"Tous les champs obligatoires ne sont pas saisis"
+						);
 					} else {
 						setErrorMessage("");
 					}
@@ -30,6 +36,7 @@ function App() {
 						setErrorMessage("");
 					}
 					setIsVisible(false);
+					console.log(data);
 				}}
 			>
 				<h1>Create account</h1>
@@ -85,7 +92,7 @@ function App() {
 				</label>
 				<p className="alert">{errorMessage}</p>
 
-				<button onClick={() => {}}>Register</button>
+				<button>Register</button>
 			</form>
 
 			<div className={isVisible ? "invisible result" : "visible result"}>
